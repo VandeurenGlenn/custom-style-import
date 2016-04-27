@@ -1,0 +1,100 @@
+<!--
+@license
+Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
+-->
+
+<script>
+(function() {
+  document.registerElement('style-import', {
+    prototype: {
+      __proto__: HTMLElement.prototype,
+      createdCallback: function() {
+        this.appendLink(this.href);
+      },
+      /**
+       * The desired host to append files to.
+       *
+       * @param {string} host The parentElement/target to append to.
+       * @return {string} nodeName.
+       */
+      get viewHost() {
+        var host = this.getAttribute('host');
+        if (this.parentElement && !host && this.parentElement.nodeName) {
+          return this.parentElement.nodeName;
+        } else if (host) {
+          return host;
+        }
+        console.warn('host: undefined')
+        return this.nodeName;
+      },
+
+      get _viewHost() {
+        return document.querySelector(this.viewHost);
+      },
+
+      /**
+       * Preforms the appendLink method when changed.
+       *
+       * @param {string} href The link to the file.
+       */
+      set href(href) {
+        this.appendLink(href);
+      },
+
+      get href() {
+        var href = this.getAttribute('href');
+        if (!href) {
+          return console.warn('href: undefined');
+        }
+        return href;
+      },
+
+      /**
+       * Appends the child into the desired host.
+       */
+      appendStyle() {
+        return new Promise(function(resolve, reject) {
+          try {
+            if (this._styleEl) {
+              this._viewHost.removeChild(this._styleEl);
+            }
+            this._styleEl = document.createElement('style');
+            this._styleEl.setAttribute('is', 'custom-style');
+            this._viewHost.appendChild(this._styleEl);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        }.bind(this));
+      },
+
+      /**
+       * Appends a link into the desired host.
+       *
+       * @param {string} href The link to the file.
+       */
+      appendLink(href) {
+        this.link = document.createElement('link');
+        this.link.rel = 'import';
+        this.link.href = href;
+        this.link.onload = this._onCSSLoaded.bind(this);
+        this._viewHost.appendChild(this.link);
+      },
+
+      _onCSSLoaded(e) {
+        this.appendStyle().then(function() {
+          var template = e.path[0].import.documentElement.querySelector('style');
+          this._styleEl.innerHTML = template.innerHTML;
+          this._viewHost.removeChild(this.link);
+          this.fireEvent(this._styleEl);
+        }.bind(this));
+      },
+
+      fireEvent(detail) {
+        document.dispatchEvent(new CustomEvent('style-import-succes', {detail}));
+        this.dispatchEvent(new CustomEvent('style-import-succes', {detail}));
+      }
+    }
+  });
+})();
+</script>

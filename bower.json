@@ -1,0 +1,26 @@
+{
+  "name": "style-import",
+  "version": "0.1.0",
+  "authors": [
+    "Glenn Vandeuren <vandeurenglenn@gmail.com>"
+  ],
+  "description": "An element providing a solution importing styles.",
+  "keywords": [
+    "web-components",
+    "style-import"
+  ],
+  "main": "style-import.html",
+  "license": "http://vandeurenglenn.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vandeurenglenn/style-import/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "webcomponentsjs": "^0.7.22"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^4.0.0"
+  }
+}
