@@ -50,25 +50,6 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
       },
 
       /**
-       * Appends the child into the desired host.
-       */
-      appendStyle() {
-        return new Promise(function(resolve, reject) {
-          try {
-            if (this._styleEl) {
-              this._viewHost.removeChild(this._styleEl);
-            }
-            this._styleEl = document.createElement('style');
-            this._styleEl.setAttribute('is', 'custom-style');
-            this._viewHost.appendChild(this._styleEl);
-            resolve();
-          } catch (e) {
-            reject(e);
-          }
-        }.bind(this));
-      },
-
-      /**
        * Appends a link into the desired host.
        *
        * @param {string} href The link to the file.
@@ -81,13 +62,37 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
         this._viewHost.appendChild(this.link);
       },
 
+      /**
+       * checks if the given property matches --*, example --example
+       * @param {HTMLElement} target the target to select the template from
+       * @return {Array} ['--some-css-var: someValue', 'some-css-var2: someValue2']
+       */
+      matchCustomStyle(target) {
+        var template = Polymer.dom(target).node.querySelector('template');
+        return template.content.textContent.match(/--(.*)/g);
+      },
+
+      applyCustomStyle(customStyles) {
+        var customStyle = {};
+        customStyles.forEach(function(prop) {
+          var name = prop.replace(/:(.*);/g, '');
+          var value = prop.replace(/--(.*):/g, '').replace(';', '');
+          customStyle[name] = value;
+        });
+        this._viewHost.customStyle = customStyle;
+        this._viewHost.updateStyles();
+      },
+
+      clean() {
+        this._viewHost.removeChild(this.link);
+      },
+
       _onCSSLoaded(e) {
-        this.appendStyle().then(function() {
-          var template = e.path[0].import.documentElement.querySelector('style');
-          this._styleEl.innerHTML = template.innerHTML;
-          this._viewHost.removeChild(this.link);
-          this.fireEvent(this._styleEl);
-        }.bind(this));
+        // TODO: support --example-example only or not?
+        var customStyles = this.matchCustomStyle(e.path[0].import.documentElement);
+        this.applyCustomStyle(customStyles);
+        this.clean();
+        this.fireEvent(this._styleEl);
       },
 
       fireEvent(detail) {
