@@ -12,21 +12,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>style-import Demo</title>
+    <title>custom-style-import Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="../style-import.html">
+    <link rel="import" href="../custom-style-import.html">
   </head>
   <body>
 
-    <p>An example of <code>&lt;style-import&gt;</code>:</p>
+    <p>An example of <code>&lt;custom-style-import&gt;</code>:</p>
 
     <button>switch css</button>
     <button id="strobeButton">Strobe!</button>
 
-    <style-import href="demo-css.html"></style-import>
+    <custom-style-import href="demo-css.html"></custom-style-import>
   </body>
   <script>
-    var styleImport = document.querySelector('style-import');
+    var styleImport = document.querySelector('custom-style-import');
     var button = document.querySelector('button');
     var strobeButton = document.querySelector('#strobeButton');
     var active = false;

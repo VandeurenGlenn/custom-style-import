@@ -1,6 +1,6 @@
-# style-import
+# custom-style-import
 
-An element providing a solution importing styles.
+An element providing a solution importing a 'custom-style'.
 
 
 ## Dependencies
@@ -28,13 +28,13 @@ And you can run it via:
     polyserve
 
 Once running, you can preview the element at
-`http://localhost:8080/components/style-import/`, where `style-import` is the name of the directory containing it.
+`http://localhost:8080/components/custom-style-import/`, where `custom-style-import` is the name of the directory containing it.
 
 
 ## Testing The Element
 
 Simply navigate to the `/test` directory of the element to run its tests. If
-you are using Polyserve: `http://localhost:8080/components/style-import/test/`
+you are using Polyserve: `http://localhost:8080/components/custom-style-import/test/`
 
 ### web-component-tester
 

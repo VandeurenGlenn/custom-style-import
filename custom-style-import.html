@@ -5,7 +5,7 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
 
 <script>
 (function() {
-  document.registerElement('style-import', {
+  document.registerElement('custom-style-import', {
     prototype: {
       __proto__: HTMLElement.prototype,
       createdCallback: function() {
@@ -96,8 +96,8 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
       },
 
       fireEvent(detail) {
-        document.dispatchEvent(new CustomEvent('style-import-succes', {detail}));
-        this.dispatchEvent(new CustomEvent('style-import-succes', {detail}));
+        document.dispatchEvent(new CustomEvent('custom-style-import-succes', {detail}));
+        this.dispatchEvent(new CustomEvent('custom-style-import-succes', {detail}));
       }
     }
   });

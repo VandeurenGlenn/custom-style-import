@@ -17,24 +17,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../style-import.html">
+    <link rel="import" href="../custom-style-import.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <test-fixture id="style-import-fixture">
+    <test-fixture id="custom-style-import-fixture">
       <template>
-        <style-import href="../demo/demo-css.html" host="html"></style-import>
+        <custom-style-import href="../demo/demo-css.html" host="html"></custom-style-import>
       </template>
     </test-fixture>
 
     <script>
-      suite('<style-import>', function() {
+      suite('<custom-style-import>', function() {
 
         var myEl;
 
         setup(function() {
-          myEl = fixture('style-import-fixture');
+          myEl = fixture('custom-style-import-fixture');
         });
 
         test('defines the "host" property', function() {
@@ -46,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
 
         test('checks if the style tag is imported', function(done) {
-          myEl.addEventListener('style-import-succes', function(event) {
+          myEl.addEventListener('custom-style-import-succes', function(event) {
             assert.equal(event.detail.nodeName, 'STYLE');
             done();
           });

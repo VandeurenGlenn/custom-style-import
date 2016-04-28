@@ -1,17 +1,17 @@
 {
-  "name": "style-import",
+  "name": "custom-style-import",
   "version": "0.2.0",
   "authors": [
     "Glenn Vandeuren <vandeurenglenn@gmail.com>"
   ],
-  "description": "An element providing a solution importing styles.",
+  "description": "An element providing a solution importing a 'custom-style'.",
   "keywords": [
     "web-components",
-    "style-import"
+    "custom-style-import"
   ],
-  "main": "style-import.html",
+  "main": "custom-style-import.html",
   "license": "http://vandeurenglenn.github.io/LICENSE.txt",
-  "homepage": "https://github.com/vandeurenglenn/style-import/",
+  "homepage": "https://github.com/vandeurenglenn/custom-style-import/",
   "ignore": [
     "/.*",
     "/test/"
