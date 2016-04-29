@@ -8,9 +8,7 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
   document.registerElement('custom-style-import', {
     prototype: {
       __proto__: HTMLElement.prototype,
-      createdCallback: function() {
-        this.appendLink(this.href);
-      },
+      
       /**
        * The desired host to append files to.
        *
@@ -19,17 +17,17 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
        */
       get viewHost() {
         var host = this.getAttribute('host');
-        if (this.parentElement && !host && this.parentElement.nodeName) {
-          return this.parentElement.nodeName;
+        if (this.parentElement && !host && this.parentElement) {
+          return this.parentElement;
         } else if (host) {
-          return host;
+          return document.querySelector(host);
         }
         console.warn('host: undefined')
-        return this.nodeName;
+        return this.localName;
       },
 
       get _viewHost() {
-        return document.querySelector(this.viewHost);
+        return this.viewHost;
       },
 
       /**
