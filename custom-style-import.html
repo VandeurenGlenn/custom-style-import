@@ -88,7 +88,7 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
         var customStyles = this.matchCustomStyle(e.path[0].import.documentElement);
         this.applyCustomStyle(customStyles);
         this.clean();
-        this.fireEvent(this._styleEl);
+        this.fireEvent(this._viewHost.customStyle);
       },
 
       fireEvent(detail) {
