@@ -8,7 +8,7 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
   document.registerElement('custom-style-import', {
     prototype: {
       __proto__: HTMLElement.prototype,
-      
+
       /**
        * The desired host to append files to.
        *
@@ -16,14 +16,12 @@ Copyright (c) 2016 Glenn Vandeuren. All rights reserved.
        * @return {string} nodeName.
        */
       get viewHost() {
-        var host = this.getAttribute('host');
-        if (this.parentElement && !host && this.parentElement) {
+        if (this.parentElement && !this.host) {
           return this.parentElement;
-        } else if (host) {
-          return document.querySelector(host);
+        } else if (this.host) {
+          return this.host;
         }
-        console.warn('host: undefined')
-        return this.localName;
+        console.warn('host: undefined');
       },
 
       get _viewHost() {
